@@ -15,16 +15,15 @@ pipeline {
             sh "helm package hello-world"
         }
     }
-}
-    stage("Make_pack") {
-        steps {
-            echo 'Packaging updated helm... '
-        }
-    }
-    stage("Upload_to_Harbor"){
-        steps {
-            echo 'Uploading to Harbor...'
-        }
+    
+    stage('Run Helm') {
+      steps {
+      script {      
+      container('helm') {
+        sh "helm ls"
+         }
+        } 
+      }
     }
   }
 }
