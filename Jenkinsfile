@@ -1,11 +1,5 @@
 pipeline {
   agent any
-  parameters {
-    choice(
-        name: 'Action',
-        choices: "apply\ndestroy",
-        description: 'Apply or Destroy the instance' )
-  }
   stages {
 
     stage('Checkout') {
