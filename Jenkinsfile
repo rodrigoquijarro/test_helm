@@ -9,7 +9,6 @@ pipeline {
         }
     }
 
-    stages {
     stage('hello-world') {
         when { changeset "hello-world/*"}
         steps {
