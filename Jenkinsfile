@@ -8,7 +8,15 @@ pipeline {
             git branch: 'main', credentialsId: 'rodrigoquijarro', url: 'https://github.com/rodrigoquijarro/test_helm.git'
         }
     }
-    
+
+    stages {
+    stage('hello-world') {
+        when { changeset "hello-world/*"}
+        steps {
+            sh "helm package hello-world"
+        }
+    }
+}
     stage("Make_pack") {
         steps {
             echo 'Packaging updated helm... '
