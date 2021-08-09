@@ -1,3 +1,6 @@
+String registry = 'docker.soramitsu.co.jp'
+String baseChartName = 'docker.soramitsu.co.jp/harbor/projects/11/helm-charts:latest'
+
 pipeline {
     environment {
         registry = "core.harbor.domain/harbor"
@@ -15,7 +18,8 @@ pipeline {
         }
         stage('Package Chart'){
             steps {
-                
+                 sh helm package 
+                 sh push_helm 
             }
         }
 
@@ -26,7 +30,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry( 'https://' + registry, dockerRegistryRWUserId) {
-                        sh "docker push ${baseImageName}"
+                        sh "helm push ${baseChartName}"
                     }
                 }
             }
